@@ -19,8 +19,9 @@ public class Ejercicio4 {
         }while(numero != 0);
         
         for(short i = 0; i < arr.size(); i++){
-            System.out.println(arr.get(i));
+            System.out.print(arr.get(i) + " ");
         }
+        System.out.println();
     }
     
 }
