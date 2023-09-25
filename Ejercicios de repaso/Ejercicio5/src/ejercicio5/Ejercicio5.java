@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class Ejercicio5 {
 
-    public static void main(String[] args) {
+     public static void main(String[] args) {
 
         Scanner sc = new Scanner(System.in);
 
@@ -30,5 +30,5 @@ public class Ejercicio5 {
             return n * factorial(n - 1);
         }
     }
-
+    
 }

@@ -17,7 +17,7 @@ public class Ejercicio2 {
         System.out.println("Dime tu nota media");
         float nota = Float.parseFloat(sc.nextLine());
         
-        System.out.println("El alumno " + nombre + " " + apellido + ", de edad " + edad + " años, tiene uan nota media de " + nota);
+        System.out.println("El alumno " + nombre + " " + apellido + ", de edad " + edad + " años, tiene una nota media de " + nota);
         
     }
     
