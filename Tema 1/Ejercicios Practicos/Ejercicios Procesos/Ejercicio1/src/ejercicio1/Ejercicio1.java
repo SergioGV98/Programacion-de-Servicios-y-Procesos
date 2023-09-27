@@ -1,6 +1,7 @@
 package ejercicio1;
 
 import java.io.IOException;
+import java.util.concurrent.TimeUnit;
 
 
 public class Ejercicio1 {
@@ -13,7 +14,6 @@ public class Ejercicio1 {
         
         try {
             Process p = proceso.start();
-            p.waitFor();
             
             ProcessHandle informacion = p.toHandle();
             //B) Muestra informacion del proceso
@@ -29,8 +29,9 @@ public class Ejercicio1 {
             System.out.println("Codigo del retorno:  " + p.exitValue());
             
             //F) Espera 5 segundos y mata al proceso
-            Thread.sleep(5000);
+            p.waitFor(5, TimeUnit.SECONDS);
             p.destroy();
+            p.waitFor(1, TimeUnit.SECONDS);
             
             //G) Muestra de nuevo si el proceso esta activo.
             System.out.println("¿Esta vivo el proceso? " + p.isAlive());
