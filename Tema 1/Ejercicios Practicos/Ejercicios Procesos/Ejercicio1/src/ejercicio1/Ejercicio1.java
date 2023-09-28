@@ -8,16 +8,13 @@ public class Ejercicio1 {
     public static void main(String[] args) {
         
         //A) Crear un proceso con ProcessBuilder
-        ProcessBuilder proceso = new ProcessBuilder("bash", "-c", "ps aux");
-        proceso.inheritIO();
+        ProcessBuilder proceso = new ProcessBuilder("gnome-system-monitor");
         
         try {
             Process p = proceso.start();
-            p.waitFor();
             
-            ProcessHandle informacion = p.toHandle();
             //B) Muestra informacion del proceso
-            System.out.println("Informacion del proceso " + informacion);
+            System.out.println("Informacion del proceso " + p.info());
             
             //C) Muestra si el proceso esta Activo
             System.out.println("¿Esta vivo el proceso? " + p.isAlive());
@@ -25,8 +22,12 @@ public class Ejercicio1 {
             //D) Muestra el PID del proceso.
             System.out.println("PID del proceos:  " + p.pid());
             
-            //E) Muestra el codigo de retorno del proceso
-            System.out.println("Codigo del retorno:  " + p.exitValue());
+            try {
+                //E) Muestra el codigo de retorno del proceso
+                System.out.println("Codigo del retorno:  " + p.exitValue());
+            } catch(IllegalThreadStateException ex){
+                System.out.println(ex.getMessage());
+            }
             
             //F) Espera 5 segundos y mata al proceso
             Thread.sleep(5000);

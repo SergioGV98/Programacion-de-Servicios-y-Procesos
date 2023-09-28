@@ -23,6 +23,7 @@ public class Ejercicio2 {
         ProcessBuilder procesoSinArgumento = new ProcessBuilder(comando);
         procesoSinArgumento.inheritIO();
         
+        
         ProcessBuilder procesoConArgumentos = new ProcessBuilder(comando, argumento);
         procesoConArgumentos.inheritIO();
         
@@ -40,13 +41,14 @@ public class Ejercicio2 {
             //B)
             System.out.println("COMANDO CON UN ARGUMENTO");
             p = procesoConArgumentos.start();
+            p.waitFor();
             System.out.println();            
             
             //C)
             System.out.println("COMANDO CON VARIOS ARGUMENTOS");
             p = procesoConVariosArgumentos.start();
             
-        } catch (IOException ex) {
+        } catch (IOException | InterruptedException ex) {
            System.out.println(ex.getMessage());
         }
         
