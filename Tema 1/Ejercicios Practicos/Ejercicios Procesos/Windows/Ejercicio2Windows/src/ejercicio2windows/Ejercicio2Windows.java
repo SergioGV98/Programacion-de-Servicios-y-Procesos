@@ -1,26 +1,26 @@
-package ejercicio2;
+
+package ejercicio2windows;
 
 import java.io.IOException;
 
-public class Ejercicio2 {
+public class Ejercicio2Windows {
 
     public static void main(String[] args) {
-        
         //A) Crea un programa que lance un proceso con ProcessBuilder que se encargue de
         // ejecutar un comando sin argumentos.
         
-        String comando = "ls";
+        String comando = "dir";
         
         //B) Crea un programa que lance un proceso con ProcessBuilder que se
         // encargue de ejecutar un comando con un argumento.
-        String argumento = "-R";
+        String argumento = "/s";
         
         //C) Crea un programa que lance un proceso con ProcessBuilder que se encargue
         // de ejecutar un comando con dos argumentos
         
-        String argumento2 = "-t";
+        String argumento2 = "/b";
         
-        ProcessBuilder procesoSinArgumento = new ProcessBuilder(comando);
+        ProcessBuilder procesoSinArgumento = new ProcessBuilder("cmd.exe", comando);
         procesoSinArgumento.inheritIO();
         
         ProcessBuilder procesoConArgumentos = new ProcessBuilder(comando, argumento);
@@ -49,7 +49,6 @@ public class Ejercicio2 {
         } catch (IOException ex) {
            System.out.println(ex.getMessage());
         }
-        
     }
     
 }
