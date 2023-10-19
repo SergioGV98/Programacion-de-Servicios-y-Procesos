@@ -36,11 +36,12 @@ public class Act1punto5 {
                 try(var br = new BufferedReader(new InputStreamReader(p.getInputStream()))){
                     String linea;
                     String ret = "";
+                    
                     while ((linea = br.readLine()) != null) {
                         ret += linea;
                     }
                     
-                    try(var fw = new FileWriter(ret+".md5")){
+                    try(var fw = new FileWriter(args[1]+".md5")){
                         fw.write(ret);
                     }
                 }
