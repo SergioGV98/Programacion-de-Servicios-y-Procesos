@@ -1,11 +1,8 @@
 package act1punto6;
 
 import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
-import java.io.PrintWriter;
 import java.util.Scanner;
 
 public class Act1punto6 {
@@ -22,10 +19,16 @@ public class Act1punto6 {
 
             pb = new ProcessBuilder(parts);
 
-            if (!comando.contains("exit")) {
+            if (!comando.contains("exit") && !comando.contains("quit")) {
                 try {
                     Process p = pb.start();
                     try (var br = new BufferedReader(new InputStreamReader(p.getInputStream()))) {
+                        String linea;
+                        while ((linea = br.readLine()) != null) {
+                            System.out.println(linea);
+                        }
+                    }
+                    try (var br = new BufferedReader(new InputStreamReader(p.getErrorStream()))) {
                         String linea;
                         while ((linea = br.readLine()) != null) {
                             System.out.println(linea);
