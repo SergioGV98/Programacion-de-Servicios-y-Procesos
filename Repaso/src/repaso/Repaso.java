@@ -2,10 +2,12 @@ package repaso;
 
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Repaso {
@@ -66,8 +68,7 @@ public class Repaso {
 
         } while (!ficheroEn.contains("exit"));
          */
-        
-        
+ /*
         ProcessBuilder pb = new ProcessBuilder("sort");
 
         if (args.length < 1) {
@@ -90,6 +91,35 @@ public class Repaso {
             }
         } catch (IOException ex) {
             System.out.printf("ERROR: %s\n", ex.getMessage());
+        }
+         */
+        ArrayList<String> comandos = new ArrayList<String>();
+        try (var br = new BufferedReader(new FileReader("comandos.txt"))) {
+            String linea;
+            while ((linea = br.readLine()) != null) {
+                comandos.add(linea);
+            }
+        } catch (IOException ex) {
+            System.out.printf("ERROR: %s\n", ex.getMessage());
+        }
+
+        for (int i = 0; i < comandos.size(); i++) {
+            if(comandos.get(i).equals("sort")){
+                ProcessBuilder pb = new ProcessBuilder(comandos.get(i), "prueba.txt");
+                try{
+                    Process p = pb.start();
+                    try(var br = new BufferedReader(new InputStreamReader(p.getInputStream())); 
+                            var salida = new FileWriter(new File("salida.txt"))){
+                        String linea;
+                        while((linea = br.readLine()) != null){
+                            salida.write(linea + "\n");
+                            System.out.println(linea);
+                        }
+                    }
+                } catch(IOException ex){
+                    System.out.printf("ERROR: %s\n", ex.getMessage());
+                }
+            }
         }
     }
 
