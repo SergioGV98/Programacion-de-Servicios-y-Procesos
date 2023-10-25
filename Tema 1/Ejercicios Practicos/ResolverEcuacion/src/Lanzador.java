@@ -11,7 +11,9 @@ public class Lanzador {
     public static void main(String[] args) {
 
         Scanner sc = new Scanner(System.in);
-
+        
+        args = new String[3];
+        
         String a;
         String b;
         String c;

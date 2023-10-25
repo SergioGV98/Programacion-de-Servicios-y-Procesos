@@ -198,6 +198,35 @@ public class Repaso {
             
         }while(!comando.equals("exit") && !comando.equals("quit"));
          */
+ 
+         // Situacion el la que tenga que pasar tantos args por consola y no lo sepa
+         /*
+         ArrayList<String> argumentList = new ArrayList<>();
+
+        while (true) {
+            System.out.println("Dime el valor (o escribe 'exit' para finalizar):");
+            String input = sc.nextLine();
+
+            if (input.equals("exit")) {
+                break;
+            }
+
+            argumentList.add(input);
+        }
+
+        // Convierte la lista en un array si es necesario
+        String[] arguments = argumentList.toArray(new String[0]);
+
+        // Ahora, puedes usar el array 'arguments' en tu programa.
+        // Por ejemplo, puedes recorrerlo y realizar acciones en función de los valores ingresados.
+        for (String argument : arguments) {
+            System.out.println("Valor ingresado: " + argument);
+        }
+
+        // Luego, puedes utilizar 'arguments' como argumentos para tu 'ProcessBuilder', si es necesario.
+        // ProcessBuilder pb = new ProcessBuilder("java", "-cp", "build/classes/", "Ecuacion", arguments);
+    }
+         */
     }
 
 }
