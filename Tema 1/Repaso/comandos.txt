@@ -1,1 +1,1 @@
-sort
+ls date ifconfig

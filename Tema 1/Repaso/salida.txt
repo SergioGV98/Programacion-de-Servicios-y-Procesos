@@ -1,4 +1,30 @@
-Alfonso
-Marta
-Paco
-Sergio
+build
+build.xml
+comandos.txt
+manifest.mf
+nbproject
+prueba.txt
+src
+test
+total 36
+drwxrwxr-x 3 sergio sergio 4096 oct 25 15:18 build
+-rw-rw-r-- 1 sergio sergio 3530 oct 24 19:21 build.xml
+-rw-rw-r-- 1 sergio sergio   16 oct 25 17:19 comandos.txt
+-rw-rw-r-- 1 sergio sergio   82 oct 24 19:21 manifest.mf
+drwxrwxr-x 3 sergio sergio 4096 oct 25 15:18 nbproject
+-rw-rw-r-- 1 sergio sergio   25 oct 24 19:21 prueba.txt
+-rw-rw-r-- 1 sergio sergio   71 oct 25 17:43 salida.txt
+drwxrwxr-x 3 sergio sergio 4096 oct 25 15:18 src
+drwxrwxr-x 2 sergio sergio 4096 oct 24 19:22 test
+total 44
+drwxrwxr-x 6 sergio sergio 4096 oct 25 17:43 .
+drwxrwxr-x 6 sergio sergio 4096 oct 25 15:18 ..
+drwxrwxr-x 3 sergio sergio 4096 oct 25 15:18 build
+-rw-rw-r-- 1 sergio sergio 3530 oct 24 19:21 build.xml
+-rw-rw-r-- 1 sergio sergio   16 oct 25 17:19 comandos.txt
+-rw-rw-r-- 1 sergio sergio   82 oct 24 19:21 manifest.mf
+drwxrwxr-x 3 sergio sergio 4096 oct 25 15:18 nbproject
+-rw-rw-r-- 1 sergio sergio   25 oct 24 19:21 prueba.txt
+-rw-rw-r-- 1 sergio sergio  567 oct 25 17:43 salida.txt
+drwxrwxr-x 3 sergio sergio 4096 oct 25 15:18 src
+drwxrwxr-x 2 sergio sergio 4096 oct 24 19:22 test

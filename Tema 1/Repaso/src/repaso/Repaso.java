@@ -93,7 +93,7 @@ public class Repaso {
             System.out.printf("ERROR: %s\n", ex.getMessage());
         }
          */
- 
+ /*
  
         ArrayList<String> comandos = new ArrayList<String>();
         try (var br = new BufferedReader(new FileReader("comandos.txt"))) {
@@ -123,6 +123,81 @@ public class Repaso {
                 }
             }
         }
+         */
+        //ArrayList<String> comandos = new ArrayList<String>();
+        /* Comandos hacia abajo
+        try (var br = new BufferedReader(new FileReader("comandos.txt"))) {
+            String linea;
+            while ((linea = br.readLine()) != null) {
+                comandos.add(linea);
+            }
+        } catch (IOException ex) {
+            System.out.printf("ERROR: %s\n", ex.getMessage());
+        } */
+        // Comandos en fila
+        /*
+        try (var br = new BufferedReader(new FileReader("comandos.txt"))) {
+            String linea;
+            String[] comandosSinEspacios = null;
+            while ((linea = br.readLine()) != null) {
+                comandosSinEspacios = linea.split(" ");
+            }
+            for (String comando : comandosSinEspacios) {
+                comandos.add(comando);
+            }
+        } catch (IOException ex) {
+            System.out.printf("ERROR: %s\n", ex.getMessage());
+        }
+
+        ProcessBuilder pb = new ProcessBuilder();
+
+        try {
+            for (byte i = 0; i < comandos.size(); i++) {
+                pb = new ProcessBuilder(comandos.get(i));
+                Process p = pb.start();
+                try (var br = new BufferedReader(new InputStreamReader(p.getInputStream())); var fw = new FileWriter(new File("salida.txt"), true)) {
+                    fw.write("Comando> " + comandos.get(i) + "\n");
+                    String linea;
+
+                    while ((linea = br.readLine()) != null) {
+                        fw.write(linea + "\n");
+                    }
+
+                }
+            }
+        } catch (IOException ex) {
+            System.out.printf("ERROR: %s\n", ex.getMessage());
+        }*/
+ /*
+        
+        String comando = "";
+        
+        do{
+            System.out.println("Escribe el comando");
+            comando = sc.nextLine();
+            String comandos [] = comando.split(" ");
+            
+            if(!comando.equals("exit") && !comando.equals("quit")){
+                ProcessBuilder pb = new ProcessBuilder(comandos);
+                try{
+                    Process p = pb.start();
+                    pb.redirectErrorStream(true); // Redirige los errores tambien a la salida
+                    
+                    try(var br = new BufferedReader(new InputStreamReader(p.getInputStream())); 
+                            var fw = new FileWriter("salida.txt", true)){
+                        String linea;
+                        while((linea = br.readLine()) !=  null){
+                            fw.write(linea + "\n");
+                        }
+                    } 
+                    
+                } catch(IOException ex){
+                    System.out.printf("ERROR: %s\n", ex.getMessage());
+                }
+            }
+            
+        }while(!comando.equals("exit") && !comando.equals("quit"));
+         */
     }
 
 }
