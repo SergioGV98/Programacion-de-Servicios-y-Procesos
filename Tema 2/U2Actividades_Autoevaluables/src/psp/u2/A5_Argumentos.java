@@ -1,7 +1,5 @@
 package psp.u2;
 
-import java.util.ArrayList;
-
 public class A5_Argumentos {
 
     public static void main(String[] args) {
