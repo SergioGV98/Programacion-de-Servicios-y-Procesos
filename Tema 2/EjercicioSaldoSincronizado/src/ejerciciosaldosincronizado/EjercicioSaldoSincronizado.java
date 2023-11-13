@@ -4,7 +4,7 @@ public class EjercicioSaldoSincronizado {
 
     public static void main(String[] args) {
        
-        Cuenta general = new Cuenta(1000);
+        Cuenta general = new Cuenta(500);
         Usuario manuel = new Usuario(general, "Manuel", "\u001B[32m");
         Usuario luis = new Usuario(general, "Luis", "\u001B[33m");
         
@@ -17,7 +17,6 @@ public class EjercicioSaldoSincronizado {
         } catch(InterruptedException ex){
             System.out.printf("ERROR: %s\n", ex.getMessage());
         }
-         System.out.printf("En la cuenta quedan %d\n", general.getSaldo());
     }
     
 }

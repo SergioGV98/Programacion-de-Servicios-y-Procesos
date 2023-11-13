@@ -18,21 +18,32 @@ public class Usuario extends Thread {
     public void run() {
         Random r = new Random();
         int dineroRetirado = 0;
-        int dinero = 0;
+        int dineroIngresado = 0;
+        int dinero;
 
         for (int i = 0; i < 5; i++) {
             try {
-                dinero = r.nextInt(50,201);
-                if(cuenta.dineroDisponible(dinero)){
-                    dineroRetirado += dinero;
+                if (r.nextBoolean()) {
+                    dinero = r.nextInt(50, 201);
+                    cuenta.ingreso(nombre, color, dinero);
+                    dineroIngresado += dinero;
+                    System.out.printf("Saldo actual de la cuenta %d\n", cuenta.getSaldo());
+                    Thread.sleep((long) (r.nextInt(100, 501)));
+                } else {
+                    dinero = r.nextInt(50, 201);
+                    if( cuenta.reintegro(nombre, color, dinero)){
+                         dineroRetirado += dinero;
+                    }
+                    System.out.printf("Saldo actual de la cuenta %d\n", cuenta.getSaldo());
+                    Thread.sleep((long) (r.nextInt(100, 501)));
                 }
-                cuenta.reintegro(nombre, color, dinero);
-                Thread.sleep((long) (r.nextInt(100, 501)));
             } catch (InterruptedException ex) {
                 System.out.printf("ERROR: %s\n", ex.getMessage());
             }
         }
-        System.out.printf("%s%s ha retirado %d Euros de la cuenta\n", color,nombre, dineroRetirado);
+        System.out.printf("%s%s ha ingresado %d Euros de la cuenta\n", color, nombre, dineroIngresado);
+        System.out.printf("%s%s ha retirado %d Euros de la cuenta\n", color, nombre, dineroRetirado);
+        System.out.printf("En la cuenta quedan %d\n", cuenta.getSaldo());
     }
 
 }
