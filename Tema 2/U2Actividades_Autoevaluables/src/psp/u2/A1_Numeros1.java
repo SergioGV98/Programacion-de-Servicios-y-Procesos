@@ -3,7 +3,7 @@ package psp.u2;
 
 public class A1_Numeros1 extends Thread{
     
-    public static final String ANSI_AZUL = "\033[34m";
+    public static final String ANSI_YELLOW = "\033[33m";
     
     @Override
     public void run() {
@@ -14,7 +14,7 @@ public class A1_Numeros1 extends Thread{
                 suma += i;
             }
         }
-        System.out.printf("%sLa suma de los numeros divisibles entre 100 y 1000 es: %d\n", ANSI_AZUL,suma);
+        System.out.printf("%sLa suma de los numeros divisibles entre 100 y 1000 es: %d\n", ANSI_YELLOW,suma);
         
     }
     

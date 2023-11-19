@@ -4,7 +4,6 @@ package psp.u2;
 public class A9_Factorial {
     
     public static void main(String[] args) {
-        args[0] = "10";
         
         if (args.length == 0) {
             System.out.println("Debes proporcionar al menos un número como argumento.");
