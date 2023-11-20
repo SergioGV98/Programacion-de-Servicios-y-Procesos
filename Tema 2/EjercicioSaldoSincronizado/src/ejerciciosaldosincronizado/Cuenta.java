@@ -29,10 +29,7 @@ public class Cuenta {
     }
 
     public synchronized boolean dineroDisponible(int retiro) {
-        if (this.saldo >= retiro) {
-            return true;
-        }
-        return false;
+        return this.saldo >= retiro;
     }
 
 }
