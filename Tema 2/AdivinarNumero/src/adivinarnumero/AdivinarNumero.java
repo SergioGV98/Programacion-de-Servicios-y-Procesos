@@ -10,25 +10,29 @@ public class AdivinarNumero {
 
         System.out.printf("Numero de jugadores 5\nRango de numeros: Entre 1 y 50\nNumero a adivinar: %d\n", juego.getNumeroAdivinar());
 
-        for (byte i = 1; i <= 5; i++) {
+        byte i = 1;
+        boolean juegoTerminado = false;
+
+        do {
             Jugador j = new Jugador(i, juego, "\u001B[3" + i + "m");
             arr.add(j);
             j.start();
+
             try {
                 j.join();
-                if (j.isAcertado() == true) {
-                    break;
+                if (j.isAcertado()) {
+                    juegoTerminado = true;
                 }
             } catch (InterruptedException ex) {
                 System.out.printf("ERROR: %s\n", ex.getMessage());
             }
 
             if (i == 5) {
-                i = 0;
+                i = 1;
+            } else {
+                i++;
             }
-
-        }
-
+        } while (!juegoTerminado && i <= 5);
     }
 
 }
