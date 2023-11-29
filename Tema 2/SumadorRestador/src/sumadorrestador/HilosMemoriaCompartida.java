@@ -1,4 +1,4 @@
-package hilosmemoriacompartida;
+package sumadorrestador;
 
 public class HilosMemoriaCompartida {
 

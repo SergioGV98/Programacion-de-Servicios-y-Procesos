@@ -1,24 +1,25 @@
 
-package hilosmemoriacompartida;
+package sumadorrestador;
 
-public class Sumador extends Thread{
+public class Restador implements Runnable {
     
     private final Contador c;
-    
-    public Sumador(Contador c){
-        this.c=c;
+
+    public Restador(Contador c) {
+        this.c = c;
     }
-    
+
     @Override
-    public void run(){
+    public void run() {
+        
         for(int i = 0; i < 300; i++){
             try{
-                c.sumarSync();
+                c.restarSync();
                 Thread.sleep((long) (Math.random() * 100 +50));
             } catch(InterruptedException ex){
                 System.out.println("ERROR");
             }
         }
     }
-
+    
 }

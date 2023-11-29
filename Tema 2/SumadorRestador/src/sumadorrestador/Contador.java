@@ -1,5 +1,5 @@
 
-package hilosmemoriacompartida;
+package sumadorrestador;
 
 public class Contador {
     
