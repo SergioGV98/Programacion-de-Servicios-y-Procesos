@@ -6,8 +6,8 @@ public class HilosMemoriaCompartida {
         
         Contador c = new Contador(100);
         
-        Sumador suma = new Sumador("Sumador", c);  
-        Thread resta = new Thread(new Restador("Resta", c));
+        Sumador suma = new Sumador(c);  
+        Thread resta = new Thread(new Restador(c));
         
         suma.start();
         resta.start();

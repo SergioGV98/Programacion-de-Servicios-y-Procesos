@@ -9,12 +9,22 @@ public class Contador {
         this.c = c;
     }
     
-    public void incrementar(){
+    public synchronized void sumarSync() throws InterruptedException {
+        while (c % 2 != 0) {
+            wait();
+        }
         c++;
+        System.out.printf("%sSumador %d\n", "\u001B[31m", c);
+        notify();
     }
-    
-    public void decrementar(){
+
+    public synchronized void restarSync() throws InterruptedException {
+        while (c % 2 == 0) {
+            wait();
+        }
         c--;
+        System.out.printf("%sRestador %d\n", "\u001B[32m", c);
+        notify();
     }
     
     public int valor(){
