@@ -1,19 +1,18 @@
 package tienda;
 
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.Random;
 public class Cliente implements Runnable{
     
     private final Tienda tienda;
     private final int identificador;
     private final ArrayList<String> productos;
-    private final int cantidad;
+    private int cantidad;
 
-    public Cliente(Tienda tienda, int identificador, int cantidad) {
+    public Cliente(Tienda tienda, int identificador) {
         this.tienda = tienda;
         this.identificador = identificador;
         this.productos = tienda.obtenerProductos();
-        this.cantidad = cantidad;
     }
 
     public int getIdentificador() {
@@ -30,9 +29,10 @@ public class Cliente implements Runnable{
 
     @Override
     public void run() {
-        
+        Random r = new Random();
         try {
             for(int i = 0; i < productos.size(); i++){
+                cantidad = r.nextInt(1,5);
                 tienda.comprar(this, productos.get(i));
                 Thread.sleep(2000);
             }

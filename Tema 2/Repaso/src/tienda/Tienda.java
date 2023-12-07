@@ -3,7 +3,6 @@ package tienda;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
-import java.util.Set;
 
 public class Tienda {
 
@@ -52,8 +51,9 @@ public class Tienda {
         for (HashMap.Entry<String, Integer> entry : inventario.entrySet()) {
             String producto = entry.getKey();
             inventario.put(producto, 10);
-            System.out.println("Se han repuesto todos los productos.");
         }
+        System.out.println("Se han repuesto todos los productos.");
+        notifyAll();
     }
 
     public synchronized void comprar(Cliente cliente, String producto) throws InterruptedException {
@@ -61,7 +61,7 @@ public class Tienda {
             if (consultarProducto(producto) == 0) {
                 System.out.printf("[Cliente %d] El producto [%s] está agotado.\n", cliente.getIdentificador(), producto);
             } else {
-                System.out.printf("[Cliente %d] No queda suficientes %s [%d] quiero comprar [%s].\n", cliente.getIdentificador(), producto, consultarProducto(producto), cliente.getCantidad());
+                System.out.printf("[Cliente %d] No queda suficientes suficientes productos de los que quiero comprar.\n", cliente.getIdentificador());
             }
             wait();
         }
@@ -74,7 +74,6 @@ public class Tienda {
     public synchronized void compraFinalizada(Cliente cliente) {
         System.err.printf("[Cliente %d] ha terminado de comprar.\n", cliente.getIdentificador());
         consultarTodosProductos();
-        notifyAll();
     }
 
 }
