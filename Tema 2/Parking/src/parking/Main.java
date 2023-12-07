@@ -1,24 +1,21 @@
 package parking;
 
-import java.util.ArrayList;
-
 public class Main {
 
     public static void main(String[] args) {
-        ArrayList<Coche> arr = new ArrayList<>();
         Parking parking = new Parking();
 
         for (byte i = 0; i < 50; i++) {
-            Coche c = new Coche(parking);
-            arr.add(c);
-            c.start();
-        }
-        
-        for(byte i = 0; i< 50; i++){
+            if (i % 13 < 10) {
+                new Thread(new Coche(parking)).start();
+            } else {
+                new Thread(new Camion(parking)).start();
+            }
+
             try {
-                arr.get(i).join();
+                Thread.sleep(1500);
             } catch (InterruptedException ex) {
-                System.out.println(ex.getMessage());
+                System.out.printf("ERROR: %s\n", ex.getMessage());
             }
         }
 

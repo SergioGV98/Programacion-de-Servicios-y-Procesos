@@ -1,6 +1,6 @@
 package sumadorrestador;
 
-public class HilosMemoriaCompartida {
+public class Main {
 
     public static void main(String[] args) {
         
