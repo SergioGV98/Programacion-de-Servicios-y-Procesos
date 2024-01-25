@@ -10,6 +10,7 @@ public class Actividad_3 {
         try {
             //192.168.96.0
             System.out.println("Scanning...");
+            System.out.println(InetAddress.getLocalHost());
             System.out.println("Checking network 192.168.1.0");
             for(int i = 0; i < 200; i++){
                 if(InetAddress.getByName("192.168.96." + i).isReachable(100)){
