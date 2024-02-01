@@ -15,7 +15,7 @@ public class Actividad_7 {
                 String linea;
                 while ((linea = br.readLine()) != null) {
                     if (linea.contains("https")) {
-                        System.out.println(linea.trim().subSequence(3, linea.length() - 8));
+                        System.out.println(linea.trim());
                     }
                 }
             }
