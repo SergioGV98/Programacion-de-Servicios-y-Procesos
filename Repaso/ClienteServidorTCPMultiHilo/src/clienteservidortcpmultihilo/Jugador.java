@@ -40,7 +40,7 @@ public class Jugador extends Thread {
                     case 2 -> {
                         salida.println("Introduce la cantidad que quieres restar:");
                         int cantidadRestar = Integer.parseInt(entrada.readLine());
-                        contador.restar(cantidadRestar); // Aquí estaba el error, debería ser contador.restar(cantidadRestar)
+                        contador.restar(cantidadRestar); 
                         salida.println("Resta realizada. El contador ahora es: " + contador.getContador());
                     }
                     default -> {
