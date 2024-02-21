@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 
+
 public class GeneradorPreguntas {
 
     Map<String, String> preguntas = new HashMap<>();

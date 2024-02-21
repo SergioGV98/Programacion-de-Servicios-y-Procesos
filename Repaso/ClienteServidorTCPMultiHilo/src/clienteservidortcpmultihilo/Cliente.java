@@ -15,33 +15,21 @@ public class Cliente {
     public static void main(String[] args) {
         try (Socket cliente = new Socket("localhost", PORT); var entrada = new BufferedReader(new InputStreamReader(cliente.getInputStream())); var salida = new PrintWriter(new BufferedWriter(new OutputStreamWriter(cliente.getOutputStream())), true); var entradaUsuario = new BufferedReader(new InputStreamReader(System.in))) {
 
-            String linea;
+            String send;
+            String response;
+
             while (true) {
 
-                linea = entrada.readLine();
-                System.out.println(linea);
+                while ((response = entrada.readLine()) != null) {
+                    System.out.println(response);
+                }
 
-                linea = entrada.readLine();
-                System.out.println(linea);
-
-                linea = entrada.readLine();
-                System.out.println(linea);
-
-                linea = entrada.readLine();
-                System.out.println(linea);
-
-                String opcionUsuario = entradaUsuario.readLine();
-                salida.println(opcionUsuario);
-
-                linea = entrada.readLine();
-                System.out.println(linea);
-
-                opcionUsuario = entradaUsuario.readLine();
-                salida.println(opcionUsuario);
-
-                // Procesar la respuesta del servidor
-                linea = entrada.readLine();
-                System.out.println(linea);
+                send = entradaUsuario.readLine();
+                salida.println(send);
+                
+                 while ((response = entrada.readLine()) != null) {
+                    System.out.println(response);
+                }
             }
         } catch (IOException ex) {
             System.out.printf("ERROR: %s\n", ex.getMessage());

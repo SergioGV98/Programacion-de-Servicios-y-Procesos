@@ -1,0 +1,406 @@
+//SERVIDOR | CLIENTE TCP MONOHILO CON MAP | GENERADOR DE PREGUNTAS
+
+
+/*
+public class Servidor {
+
+    public static final int PORT = 5656;
+
+    public static void main(String[] args) {
+
+        try (ServerSocket server = new ServerSocket(PORT)) {
+            System.out.println("Servidor TCP iniciado.");
+
+            GeneradorPreguntas generador = new GeneradorPreguntas();
+            generador.agregarPregunta("¿Cual es la capital de Francia?", "Paris");
+            generador.agregarPregunta("¿Cuantos planetas hay en el sistema solar?", "8");
+            generador.agregarPregunta("¿Quien escribio 'Don Quijote de la Mancha'?", "Miguel de Cervantes");
+
+            try (Socket cliente = server.accept(); var entrada = new BufferedReader(new InputStreamReader(cliente.getInputStream())); var salida = new PrintWriter(new OutputStreamWriter(cliente.getOutputStream()), true)) {
+                System.out.printf("Cliente conectado desde la IP %s\n", cliente.getRemoteSocketAddress());
+                while (true) {
+                    Map<String, String> preguntaRandom = generador.getPreguntaRandom();
+                    salida.println(preguntaRandom.keySet());
+                    String str = entrada.readLine();
+                    System.out.printf("Cliente: %s\n", str);
+                    if (preguntaRandom.containsValue(str)) {
+                        salida.println("Server: ¡Correcto!");
+                    } else if (str.equalsIgnoreCase(("Destroy"))) {
+                        System.out.println("Se ha cerrado el servidor");
+                        break;
+                    } else {
+                        salida.println("Server: ¡Incorrecto!");
+                    }
+
+                }
+            }
+        } catch (IOException ex) {
+            System.out.printf("ERROR: %S\n", ex.getMessage());
+            System.exit(-1);
+        }
+
+    }
+
+ }
+*/
+
+/*
+public class Cliente {
+    
+    public static final int PORT = 5656;
+    
+    public static void main(String[] args) {
+        
+        try(Socket cliente = new Socket("localhost", PORT); 
+                var entrada = new BufferedReader(new InputStreamReader(cliente.getInputStream()));
+                var salida = new PrintWriter(new BufferedWriter(new OutputStreamWriter(cliente.getOutputStream())), true)){
+            String linea;
+            Scanner sc = new Scanner(System.in);
+            while (true) {                
+                linea = entrada.readLine();
+                System.out.println(linea);
+                linea = sc.nextLine();
+                salida.println(linea);
+                if(linea.equalsIgnoreCase("destroy")){
+                    System.out.println("Desconectando del servidor.");
+                    break;
+                }
+                linea = entrada.readLine();
+                System.out.println(linea);
+            }
+
+        } catch(IOException ex){
+            System.out.printf("ERROR: %s\n", ex.getMessage());
+            System.exit(-1);
+        }
+        
+        
+    }
+    
+}
+*/
+
+/*
+public class GeneradorPreguntas {
+
+    Map<String, String> preguntas = new HashMap<>();
+
+    public void agregarPregunta(String pregunta, String respuesta) {
+        preguntas.put(pregunta, respuesta);
+    }
+
+    public Map<String, String> getPreguntaRandom() {
+        Random r = new Random();
+
+        String[] preguntasArray = preguntas.keySet().toArray(new String[0]);
+        String preguntaAleatoria = preguntasArray[r.nextInt(preguntas.size())];
+        String respuesta = preguntas.get(preguntaAleatoria);
+        
+        Map<String, String> preguntaElegida = new HashMap<>();
+        preguntaElegida.put(preguntaAleatoria, respuesta);
+        
+        return preguntaElegida;
+    }
+}
+*/
+
+//SERVIDOR | CLIENTE TCP MULTIHILO CON OBJETO COMUN
+
+/*
+public class Servidor {
+
+    public static final int PORT = 5656;
+
+    public static void main(String[] args) {
+
+        Map<String, Integer> libros = new HashMap<>();
+        libros.put("Nacidos de la bruma: El Imperio final", 10);
+        libros.put("Harry Potter: Las Reliquias de la muerte", 15);
+        libros.put("Juego de trono", 20);
+
+        Libreria libreria = new Libreria("Academia azul", libros);
+
+        ServerSocket socketServidor = null;
+        Socket socketCliente = null;
+        try {
+            socketServidor = new ServerSocket(PORT);
+        } catch (IOException ex) {
+            System.err.println("No puede escucharse el puerto " + PORT);
+            System.exit(-1);
+        }
+
+        System.out.println("Escuchando: " + socketServidor);
+
+        try {
+
+            while (true) {
+                socketCliente = socketServidor.accept();
+                System.out.println("Conexión aceptada " + socketCliente);
+                Comprador worker = new Comprador(socketCliente, libreria);
+                worker.start();
+            }
+        } catch (IOException e) {
+            System.err.println(e.getMessage());
+        }
+    }
+
+}
+*/
+
+/*
+public class Cliente {
+
+    public static final int PORT = 5656;
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        try (Socket cliente = new Socket("localhost", PORT); var entrada = new BufferedReader(new InputStreamReader(cliente.getInputStream())); var salida = new PrintWriter(new BufferedWriter(new OutputStreamWriter(cliente.getOutputStream())), true)) {
+
+            String response;
+            String linea;
+
+            while (true) {
+
+                response = entrada.readLine();
+                System.out.println(response);
+                response = entrada.readLine();
+                System.out.println(response);
+                response = entrada.readLine();
+                System.out.println(response);
+
+                linea = sc.nextLine();
+                salida.println(linea);
+                if (linea.equals("1")) {
+                    response = entrada.readLine();
+                    System.out.println(response);
+                    linea = sc.nextLine();
+                    salida.println(linea);
+                    response = entrada.readLine();
+                    System.out.println(response);
+                    linea = sc.nextLine();
+                    salida.println(linea);
+                    response = entrada.readLine();
+                    System.out.println(response);
+                }
+            }
+        } catch (IOException ex) {
+            System.out.printf("ERROR: %s\n", ex.getMessage());
+            System.exit(-1);
+        }
+    }
+}
+*/
+
+/*
+public class Comprador extends Thread {
+
+    private final Socket socketCliente;
+    private final Libreria libreria;
+
+    public Comprador(Socket socketCliente, Libreria libreria) {
+        this.socketCliente = socketCliente;
+        this.libreria = libreria;
+    }
+
+    @Override
+    public void run() {
+
+        try (var entrada = new BufferedReader(new InputStreamReader(socketCliente.getInputStream())); var salida = new PrintWriter(new BufferedWriter(new OutputStreamWriter(socketCliente.getOutputStream())), true)) {
+
+            String linea;
+
+            while (true) {
+                salida.printf("Bienvenido a %s. ¿Que quieres hacer?.\n", libreria.getNombre());
+                salida.println("1.- Comprar un libro\n2.- Borrar un libro");
+
+                linea = entrada.readLine();
+                System.out.println(linea);
+
+                int opcion = Integer.parseInt(linea);
+
+                switch (opcion) {
+                    case 1 -> {
+                        salida.println("Introduce el libro que quieres comprar.");
+                        String libro = entrada.readLine();
+                        salida.println("Introduce la cantidad que vas a comprar.");
+                        int cantidad = Integer.parseInt(entrada.readLine());
+                        String informacion = libreria.comprar(libro, cantidad);
+                        salida.println(informacion);
+                    }
+                }
+
+            }
+
+        } catch (IOException ex) {
+            System.out.printf("ERROR: %s\n", ex.getMessage());
+        }
+
+    }
+}
+*/
+
+/*
+public class Libreria {
+
+    private final String nombre;
+    private Map<String, Integer> libros = new HashMap<>();
+
+    public Libreria(String nombre, Map<String, Integer> libros) {
+        this.nombre = nombre;
+        this.libros = libros;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public synchronized String comprar(String nombreLibro, int cantidad) {
+        if (libros.containsKey(nombreLibro)) {
+            int cantidadActual = libros.get(nombreLibro);
+            if (cantidadActual >= cantidad) {
+                libros.put(nombreLibro, cantidadActual - cantidad);
+                int cantidadRestante = cantidadActual - cantidad;
+                return "Compra exitosa de " + cantidad + " ejemplar(es) de " + nombreLibro + ". Quedan " + cantidadRestante + " ejemplares.";
+            } else {
+                return "No hay suficientes ejemplares de " + nombreLibro + " disponibles.";
+            }
+        } else {
+            return "No tenemos ese libro.";
+        }
+    }
+
+}
+*/
+
+//SERVIDOR | CLIENTE UDP MONOHILO
+
+/*
+public class ClienteUDP {
+
+    public static void main(String[] args) {
+        try (BufferedReader in = new BufferedReader(new InputStreamReader(System.in)); DatagramSocket clientSocket = new DatagramSocket()) {
+            byte[] enviados;
+            byte[] recibidos = new byte[1024];
+
+            InetAddress IPServidor = InetAddress.getLocalHost();
+            int puerto = 5555;
+            
+            while (true) {
+                // Enviar solicitud al servidor para recibir la pregunta
+                enviados = new byte[0];
+                DatagramPacket solicitud = new DatagramPacket(enviados, enviados.length, IPServidor, puerto);
+                clientSocket.send(solicitud);
+
+                // Recibir pregunta del servidor
+                DatagramPacket recibo = new DatagramPacket(recibidos, recibidos.length);
+                clientSocket.receive(recibo);
+                String pregunta = new String(recibo.getData(), 0, recibo.getLength());
+                System.out.println(pregunta);
+
+                // Introducir respuesta
+                System.out.println("Introduce la respuesta (o escribe FIN para salir): ");
+                String respuesta = in.readLine();
+                enviados = respuesta.getBytes();
+
+                // Salir si la respuesta es "EXIT"
+                if (respuesta.equalsIgnoreCase("FIN")) {
+                    System.out.println("Saliendo del programa...");
+                    break;
+                }
+
+                // Enviar respuesta al servidor
+                DatagramPacket envio = new DatagramPacket(enviados, enviados.length, recibo.getAddress(), recibo.getPort());
+                clientSocket.send(envio);
+
+                // Recibir mensaje de confirmación del servidor
+                clientSocket.receive(recibo);
+                String mensaje = new String(recibo.getData(), 0, recibo.getLength());
+                System.out.println(mensaje);
+            }
+
+        } catch (IOException ex) {
+            System.out.printf("ERROR: %s\n", ex.getMessage());
+        }
+    }
+}*/
+
+/*
+public class ServidorUDP {
+
+    public static void main(String[] args) {
+        try (DatagramSocket serverSocket = new DatagramSocket(5555)) {
+            byte[] enviados;
+            byte[] recibidos = new byte[1024];
+            GeneradorPreguntas generador = new GeneradorPreguntas();
+            System.out.println("Servidor encendido...");
+
+            while (true) {
+                // Obtener una nueva pregunta aleatoria para cada cliente
+                Map.Entry<String, String> pregunta = generador.obtenerPreguntaAleatoria();
+                String preguntaString = pregunta.getKey();
+                String respuesta = pregunta.getValue();
+
+                // Esperar conexión del cliente y enviar la pregunta
+                DatagramPacket paqRecibido = new DatagramPacket(recibidos, recibidos.length);
+                serverSocket.receive(paqRecibido);
+                InetAddress clienteAddress = paqRecibido.getAddress();
+                int clientePort = paqRecibido.getPort();
+                
+                enviados = preguntaString.getBytes();
+                DatagramPacket paqEnviado = new DatagramPacket(enviados, enviados.length, clienteAddress, clientePort);
+                serverSocket.send(paqEnviado);
+
+                // Recibir respuesta del cliente
+                serverSocket.receive(paqRecibido);
+                String respuestaCliente = new String(paqRecibido.getData(), 0, paqRecibido.getLength());
+
+                // Verificar respuesta y enviar mensaje al cliente
+                String mensaje;
+                if (respuestaCliente.equalsIgnoreCase(respuesta)) {
+                    mensaje = "¡Respuesta correcta!\n";
+                } else {
+                    mensaje = "Respuesta incorrecta. Intentalo de nuevo.\n";
+                }
+                enviados = mensaje.getBytes();
+                paqEnviado = new DatagramPacket(enviados, enviados.length, clienteAddress, clientePort);
+                serverSocket.send(paqEnviado);
+            }
+
+        } catch (IOException ex) {
+            System.out.printf("ERROR: %s\n", ex.getMessage());
+        }
+    }
+}
+*/
+
+/*
+class GeneradorPreguntas {
+
+    private final Map<String, String> preguntasRespuestas;
+    private final Random random;
+
+    public GeneradorPreguntas() {
+        preguntasRespuestas = new HashMap<>();
+        random = new Random();
+        llenarMapa();
+    }
+
+    private void llenarMapa() {
+        preguntasRespuestas.put("¿Cual es la capital de Francia?", "Paris");
+        preguntasRespuestas.put("¿En que ano se descubrio America?", "1492");
+        preguntasRespuestas.put("¿Quien escribio 'Don Quijote de la Mancha'?", "Miguel de Cervantes");
+    }
+
+    public Map.Entry<String, String> obtenerPreguntaAleatoria() {
+        int index = random.nextInt(preguntasRespuestas.size());
+        int i = 0;
+        for (Map.Entry<String, String> entry : preguntasRespuestas.entrySet()) {
+            if (i == index) {
+                return entry;
+            }
+            i++;
+        }
+        return null;
+    }
+}
+*/
