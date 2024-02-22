@@ -404,3 +404,96 @@ class GeneradorPreguntas {
     }
 }
 */
+
+/*
+
+public class Actividad_3_2 {
+
+    public static void main(String[] args) {
+        try {
+            Enumeration<NetworkInterface> nets = NetworkInterface.getNetworkInterfaces();
+            for (NetworkInterface netIf : Collections.list(nets)) {
+                if (netIf.getName().equals("eth5")) {
+                    for (InterfaceAddress interfaceAddress : netIf.getInterfaceAddresses()) {
+                        InetAddress address = interfaceAddress.getAddress();
+                        if (address instanceof Inet4Address) {
+                            System.out.printf("Nombre de la interfaz: %s\n", netIf.getDisplayName());
+                            System.out.printf("Dirección de red: %s\n", address.getHostAddress());
+                            System.out.printf("Dirección de broadcast: %s\n", interfaceAddress.getBroadcast().getHostAddress());
+                            System.out.printf("Máscara de subred: %s\n", interfaceAddress.getNetworkPrefixLength());
+                            System.out.printf("Hashcode: %d\n",interfaceAddress.hashCode());
+                            System.out.printf("Formato extendido: %s/%s [/%s]\n", interfaceAddress.getAddress(), interfaceAddress.getNetworkPrefixLength(), interfaceAddress.getBroadcast().getHostAddress());
+                            break;  
+                        }
+                    }
+                }
+            }
+        } catch (SocketException ex) {
+            System.out.printf("ERROR: %s\n", ex.getMessage());
+        }
+    }
+}
+*/
+/*
+public class Actividad_3 {
+
+    public static void main(String[] args) {
+        try {
+            System.out.println("Scanning...");
+            System.out.println("Checking network 192.168.1.0...");
+            System.out.println("Reachable IPs:");
+            for (int i = 1; i <= 255; i++) {
+                if (InetAddress.getByName("192.168.1." + i).isReachable(1000)) {
+                    System.out.printf("--> %s%d\n", "192.168.1.", i);
+                }
+            }
+            System.out.println("Scanning finished");
+        } catch (UnknownHostException ex) {
+            System.out.printf("ERROR: %s\n", ex.getMessage());
+        } catch (IOException ex) {
+            System.out.printf("ERROR: %s\n", ex.getMessage());
+        }
+    }
+    
+}
+*/
+/*
+
+public class Actividad_3_5 {
+
+    public static void main(String[] args) {
+        try{
+            URL url = new URL("http://www.example.com/inicio.htm?nombre=Fede");
+            System.out.printf("Protocolo: %s\n", url.getProtocol());
+            System.out.printf("Nombre del Host: %s\n", url.getHost());
+            System.out.printf("Numero de puerto indicado: %s\n", url.getPort());
+            System.out.printf("Nombre del recurso: %s\n", url.getFile());
+            System.out.printf("Parte de la consulta: %s\n", url.getQuery());
+            System.out.printf("Puerto por defecto: %d\n", url.getDefaultPort());
+        }catch(Exception e){
+            System.out.printf("ERROR: /s\n", e.getMessage());
+        }
+        
+    }
+    
+}
+*/
+/*
+public class Actividad_3_6 {
+
+    public static void main(String[] args) {
+        try {
+            URL url = new URL("http://www.example.com/");
+            try (InputStream is = url.openStream(); var br = new BufferedReader(new InputStreamReader(is))) {
+                String linea;
+                while ((linea = br.readLine()) != null) {
+                    System.out.println(linea);
+                }
+            }
+        } catch (IOException e) {
+            System.out.printf("ERROR: %s\n", e.getMessage());
+        }
+    }
+    
+}
+*/
